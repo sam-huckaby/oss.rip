@@ -17,7 +17,7 @@ const RenderSection = ({section}: {section: Sections}) => {
 			console.warn(`Section couldn't be rendered`);
 
 			if (process.env.NODE_ENV !== 'production') {
-				return <pre>{JSON.stringify(section, null, 2)}</pre>;
+				return <pre>HELLO: {JSON.stringify(section, null, 2)}</pre>;
 			}
 
 			return null;

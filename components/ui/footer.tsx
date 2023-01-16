@@ -1,4 +1,4 @@
-import {RiFacebookBoxLine, RiInstagramLine, RiTwitterLine} from 'react-icons/ri';
+import {RiFacebookBoxLine, RiInstagramLine, RiTwitterLine, RiHammerLine} from 'react-icons/ri';
 import MaxWidthWrapper from './max-width-wrapper';
 import type {SocialFields} from '~/models/objects/social-fields';
 
@@ -10,16 +10,15 @@ const Footer = ({socialFields}: Props) => {
 	return (
 		<MaxWidthWrapper className='flex flex-row flex-nowrap justify-center items-center pb-8' type='footer'>
 			<p className='text-base'>
-				Made by{' '}
+				Made with <RiHammerLine className="inline text-red-600" /> by{' '}
 				<a
-					href='https://github.com/hafffe'
+					href='https://samhuckaby.com/'
 					target='_blank'
 					rel='noreferrer'
 					className='underline underline-offset-4'
 				>
-					Hafffe
-				</a>{' '}
-				for everyone
+					Sam Huckaby
+				</a>
 			</p>
 			<div className='flex flex-nowrap pl-2'>
 				{socialFields?.facebook && (

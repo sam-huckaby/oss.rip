@@ -1,6 +1,8 @@
 import person from './documents/person';
 import page from './documents/page';
 import post from './documents/post';
+import software from './documents/software';
+import review from './documents/review';
 import siteSettings from './documents/site-settings';
 
 import columns from './objects/columns';
@@ -21,6 +23,8 @@ export const schemasTypes = [
 	person,
 	page,
 	post,
+	software,
+	review,
 	siteSettings,
 	metaFields,
 	columns,

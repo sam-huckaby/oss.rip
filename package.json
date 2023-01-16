@@ -1,8 +1,8 @@
 {
-	"name": "sanity-next-template",
-	"version": "0.0.0",
+	"name": "OSS.rip",
+	"version": "0.0.1",
 	"private": true,
-	"description": "Sanity & Next.js template",
+	"description": "An open source website to review open source software",
 	"scripts": {
 		"dev": "next",
 		"build": "next build",
@@ -14,7 +14,7 @@
 	"engines": {
 		"node": ">=16"
 	},
-	"author": "Aron Hafner",
+	"author": "Sam Huckaby",
 	"license": "MIT",
 	"dependencies": {
 		"@next/font": "^13.1.1",
@@ -67,7 +67,7 @@
 		"jsxSingleQuote": true,
 		"trailingComma": "none",
 		"bracketSpacing": false,
-		"useTabs": true,
+		"useTabs": false,
 		"tabWidth": 4
 	},
 	"eslintConfig": {
