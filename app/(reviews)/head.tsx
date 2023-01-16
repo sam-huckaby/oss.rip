@@ -12,12 +12,12 @@ const Head = async () => {
 		})
 	]);
 
-	const title = `${page.title} | ${siteSettings.title}`;
-	const description = page.meta?.metaDescription || siteSettings.description;
-	const ogTitle = page.meta?.openGraphTitle ?? title;
-	const ogDescription = page.meta?.openGraphDescription;
+	const title = `${page?.title} | ${siteSettings?.title}`;
+	const description = page?.meta?.metaDescription || siteSettings?.description;
+	const ogTitle = page?.meta?.openGraphTitle ?? title;
+	const ogDescription = page?.meta?.openGraphDescription;
 	const ogImage =
-		(page.meta?.openGraphImage &&
+		(page?.meta?.openGraphImage &&
 			urlForImage(page.meta.openGraphImage).width(1200).height(627).fit('crop').url()) ??
 		null;
 

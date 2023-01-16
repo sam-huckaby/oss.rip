@@ -1,30 +1,35 @@
 import {previewData} from 'next/headers';
-import {postQuery} from '~/lib/queries';
+import {softwareQuery, softwareWithReviewsQuery} from '~/lib/queries';
 import {sanityClient} from '~/lib/sanity/client';
-import {PostPageLayout} from '~/components/layout';
+import {ReviewPageLayout} from '~/components/layout';
 import {PreviewSuspense, PostPreview} from '~/components/previews';
-import type {Post} from '~/models/post';
+import type {Software} from '~/models/software';
 
-const PostRoute = async ({params}: {params: {slug: string}}) => {
-	console.log('params.slug', params.slug);
-	const post = await sanityClient.fetch<Post>(postQuery, {
+// NOTE TO FUTURE SELF: I need to do the following:
+// - Rewrite this page to be software-centric and not post-centric
+// - I think I need to rework this query to return reviews as well as software
+// - I need to modify the <PostPageLayout> to show the list of reviews available for that software
+//
+// "software" just doesn't look like a real word anymore. I've typed it too many times... software software software...
+
+const ReviewRoute = async ({params}: {params: {slug: string}}) => {
+	const software = await sanityClient.fetch<Software>(softwareWithReviewsQuery, {
 		slug: params.slug
 	});
 
-	if (!post) {
-		console.log('no post', post);
+	if (!software) {
+		console.log('no software', software);
 	}
 
-	console.log('post', post.title);
 	if (previewData()) {
 		return (
-			<PreviewSuspense fallback={<PostPageLayout post={post} />}>
-				<PostPreview query={postQuery} variables={{slug: params.slug}} />
+			<PreviewSuspense fallback={<ReviewPageLayout software={software} />}>
+				<PostPreview query={softwareQuery} variables={{slug: params.slug}} />
 			</PreviewSuspense>
 		);
 	}
 
-	return <PostPageLayout post={post} />;
+	return <ReviewPageLayout software={software} />;
 };
 
-export default PostRoute;
+export default ReviewRoute;

@@ -30,7 +30,7 @@ export const pageWithPostsQuery = groq`
 	}
 `;
 
-export const pageWithReviewsQuery = groq`
+export const pageWithSoftwareQuery = groq`
 	{
 		"page": *[_type == 'page' && slug.current == $slug][0] {
 			...,
@@ -42,7 +42,7 @@ export const pageWithReviewsQuery = groq`
 				${youtube}
 			}
 		},
-		"reviews": *[_type == 'reviews' && defined(slug.current)] | order(_createdAt desc)[0...$limit]
+		"software": *[_type == 'software' && defined(slug.current)] | order(_createdAt desc)[0...$limit]
 	}
 `;
 

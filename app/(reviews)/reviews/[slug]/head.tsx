@@ -1,23 +1,23 @@
-import {postQuery, siteSettingsQuery} from '~/lib/queries';
+import {softwareQuery, siteSettingsQuery} from '~/lib/queries';
 import {sanityClient, urlForImage} from '~/lib/sanity/client';
 import {DefaultHead} from '~/components/shared';
 import type {SiteSettings} from '~/models/site-settings';
-import type {Post} from '~/models/post';
+import type {Software} from '~/models/software';
 
 const Head = async ({params}: {params: {slug: string}}) => {
-	const [siteSettings, post] = await Promise.all([
+	const [siteSettings, software] = await Promise.all([
 		sanityClient.fetch<SiteSettings>(siteSettingsQuery),
-		sanityClient.fetch<Post>(postQuery, {
+		sanityClient.fetch<Software>(softwareQuery, {
 			slug: params.slug
 		})
 	]);
 
-	const title = `${post.title} | ${siteSettings.title}`;
-	const description = post.meta.metaDescription || siteSettings.description;
-	const ogTitle = post.meta?.openGraphTitle ?? title;
-	const ogDescription = post.meta?.openGraphDescription;
+	const title = `${software.softwareName} | ${siteSettings?.title}`;
+	const description = software?.meta?.metaDescription || siteSettings?.description;
+	const ogTitle = software?.meta?.openGraphTitle ?? title;
+	const ogDescription = software?.meta?.openGraphDescription;
 	const ogImage =
-		(post.meta?.openGraphImage && urlForImage(post.meta.openGraphImage).width(1200).height(627).fit('crop').url()) ?? null;
+		(software?.meta?.openGraphImage && urlForImage(software.meta.openGraphImage).width(1200).height(627).fit('crop').url()) ?? null;
 
 
 	return (

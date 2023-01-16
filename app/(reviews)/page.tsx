@@ -3,30 +3,32 @@ import {sanityClient} from '~/lib/sanity/client';
 import {IndexPageLayout} from '~/components/layout';
 import {IndexPagePreview, PreviewSuspense} from '~/components/previews';
 import type {Page} from '~/models/page';
-import { pageWithReviewsQuery } from '~/lib/queries/page';
-import { Review } from '~/models/review';
+import { pageWithSoftwareQuery } from '~/lib/queries/page';
+import { Software } from '~/models/software';
 
-type PageWithReviews = {
+type PageWithSoftware = {
 	page: Page;
-	reviews: Review[];
+	software: Software[];
 };
 
 const IndexRoute = async () => {
-console.log("INFOSEC");
-	const {page, reviews} = await sanityClient.fetch<PageWithReviews>(pageWithReviewsQuery, {
+	//const {page, software} = await sanityClient.fetch<PageWithSoftware>(pageWithSoftwareQuery, {
+	const results = await sanityClient.fetch<PageWithSoftware>(pageWithSoftwareQuery, {
 		slug: 'frontpage',
 		limit: 2
 	});
-console.log(reviews);
+
+	const { page, software } = results;
+
 	if (previewData()) {
 		return (
-			<PreviewSuspense fallback={<IndexPageLayout page={page} reviews={reviews} />}>
-				<IndexPagePreview query={pageWithReviewsQuery} variables={{slug: 'frontpage', limit: 2}} />
+			<PreviewSuspense fallback={<IndexPageLayout page={page} software={software} />}>
+				<IndexPagePreview query={pageWithSoftwareQuery} variables={{slug: 'frontpage', limit: 2}} />
 			</PreviewSuspense>
 		);
 	}
 
-	return <IndexPageLayout page={page} reviews={reviews} />;
+	return <IndexPageLayout page={page} software={software} />;
 };
 
 export default IndexRoute;

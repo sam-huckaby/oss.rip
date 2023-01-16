@@ -5,7 +5,6 @@ import type {SiteSettings} from '~/models/site-settings';
 const Header = ({siteSettings}: {siteSettings: SiteSettings}) => {
 	return (
 		<header className='
-			//horizontal-wipeout bg-center bg-no-repeat bg-[length:500px_500px]
 			mx-auto max-w-5xl px-8 flex flex-row items-center h-16
 			border-b border-b-slate-200'>
 			<Link href='/'>

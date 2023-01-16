@@ -2,16 +2,16 @@
 import {Heading} from '~/components/ui';
 import {RenderSection} from '~/components/sections';
 import type {Page} from '~/models/page';
-import type {Review} from '~/models/review';
-import ReviewList from '../shared/review-list';
+import type {Software} from '~/models/software';
+import {SoftwareList} from '~/components/shared';
 
 type Props = {
 	page: Page;
-	reviews: Review[];
+	software: Software[];
 	preview?: boolean;
 }
 
-const IndexPage = ({page, reviews, preview = false}: Props) => {
+const IndexPage = ({page, software, preview = false}: Props) => {
 	if (preview && !page) {
 		return <Heading level='h2'>Loading...</Heading>;
 	}
@@ -32,10 +32,9 @@ const IndexPage = ({page, reviews, preview = false}: Props) => {
 				return <RenderSection key={section._key} section={section} />;
 			})}
 			<Heading level='h2' weight='semibold' className='py-8'>
-				Recent Reviews 
+				Recently Added Projects 
 			</Heading>
-			{/*<PostList posts={posts} />*/}
-			<ReviewList reviews={reviews} />
+			<SoftwareList software={software} />
 		</>
 	);
 };
