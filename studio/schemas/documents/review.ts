@@ -44,6 +44,15 @@ const review = defineType({
 			validation: (Rule) => Rule.required()
 		}),
 		defineField({
+			name: 'editorial',
+			title: 'Editorial?',
+			type: 'boolean',
+			description: 'Is this an editor\'s review?',
+			group: 'general',
+			initialValue: false,
+			validation: (Rule) => Rule.required()
+		}),
+		defineField({
 			type: 'metaFields',
 			name: 'meta',
 			group: 'meta'

@@ -10,7 +10,7 @@ const Footer = ({socialFields}: Props) => {
 	return (
 		<MaxWidthWrapper className='flex flex-row flex-nowrap justify-center items-center pb-8' type='footer'>
 			<p className='text-base'>
-				Made with <RiHammerLine className="inline text-red-600" /> by{' '}
+				Made with <RiHammerLine className="inline text-red-600 rotate-[45deg]" /> by{' '}
 				<a
 					href='https://samhuckaby.com/'
 					target='_blank'

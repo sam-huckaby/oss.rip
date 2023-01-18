@@ -4,7 +4,7 @@ import type {SimpleBlockContent} from '~/models/objects/simple-block-content';
 
 const PostBody = ({content}: {content: BlockContentType | SimpleBlockContent}) => {
 	return (
-		<div className={`max-w-2xl`}>
+		<div className={`max-w-2xl text-justify`}>
 			<PortableText value={content.text} />
 		</div>
 	);

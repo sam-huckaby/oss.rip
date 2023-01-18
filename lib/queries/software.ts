@@ -11,7 +11,8 @@ export const softwareWithReviewsQuery = groq`
 		...,
 		"reviews": *[_type == 'review' && references(^._id)] {
 			_createdAt,
-			excerpt,
+			title,
+			editorial,
 			content,
 		}
 	}

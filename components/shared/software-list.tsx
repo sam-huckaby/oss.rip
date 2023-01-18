@@ -20,13 +20,13 @@ const SoftwareList = ({ software }: Props) => (
 
 				return (
 					<Link key={softwareX._id} href={`/reviews/${softwareX.slug.current}`}>
-						<article>
+						<article className="hover:shadow-xl hover:transition-shadow hover:duration-500 transition-shadow duration-500 border p-2 rounded">
 							<div className='flex-col'>
 								{softwareX.featuredImage && <PostImage data={softwareX.featuredImage} width={600} height={450} />}
 								<Heading level='h2'>{softwareX.softwareName}</Heading>
 								<div className='flex flex-row items-center'>
 									{softwareX.publishedAt && <Date publishedAt={softwareX.publishedAt} />}
-									<div className='flex flex-row'>{keywords}</div>
+									<div className='flex flex-row flex-wrap'>{keywords}</div>
 								</div>
 								{softwareX?.excerpt && <PostBody content={softwareX.excerpt} />}
 							</div>

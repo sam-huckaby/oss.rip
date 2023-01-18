@@ -18,12 +18,11 @@ const IndexPage = ({page, software, preview = false}: Props) => {
 
 	return (
 		<>
+			<div className="flex flex-row items-center justify-center pb-4 text-gray-400">Do not stare directly at the bugs</div>
 			<div className="flex flex-row items-center pb-4">
 				<span className="text-sm no-grow mr-4">Search:</span>
 				<input className="border grow basis-[75%]" type="text" />
 			</div>
-			<div className="horizontal-wipeout bg-center bg-contain bg-no-repeat w-full h-[500px]">&nbsp;</div>
-			<div className="flex flex-row items-center justify-center text-gray-400">Do not stare directly at the bugs</div>
 			{page?.content?.map((section) => {
 				if (!section || Object.keys(section).length === 0) {
 					return null;
@@ -32,7 +31,7 @@ const IndexPage = ({page, software, preview = false}: Props) => {
 				return <RenderSection key={section._key} section={section} />;
 			})}
 			<Heading level='h2' weight='semibold' className='py-8'>
-				Recently Added Projects 
+				Recently Reviewed Projects 
 			</Heading>
 			<SoftwareList software={software} />
 		</>

@@ -70,6 +70,14 @@ const software = defineType({
 			validation: (Rule) => Rule.required()
 		}),
 		defineField({
+			name: 'website',
+			title: 'Website',
+			description: 'The software\'s official website',
+			type: 'url',
+			group: 'meta',
+			validation: (Rule) => Rule.required()
+		}),
+		defineField({
 			name: 'keywords',
 			type: 'array',
 			title: 'Keywords',
