@@ -35,3 +35,5 @@ declare module '@sanity/block-content-to-react' {
 	function BlockContent(props: BlockContent.PortableTextProps): ReactElement;
 	export = BlockContent;
 }
+
+declare module '@tarekraafat/autocomplete.js/dist/autoComplete' {}

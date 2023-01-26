@@ -12,7 +12,7 @@ const Header = ({siteSettings}: {siteSettings: SiteSettings}) => {
 					flex flex-row items-center
 					border-4 border-black rounded-t-full
 					h-[64px] w-[64px]">
-					<span className="text-2xl bg-white -ml-[42px]">OSS.<span className="font-bold">rip</span></span>
+					<span className="text-2xl bg-white -ml-[43px]">OSS.<span className="text-black font-bold">rip</span></span>
 				</div>
 			</Link>
 			<MainNavigation navigation={siteSettings.navigation} />
