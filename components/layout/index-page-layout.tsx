@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { debounce } from '@mui/material/utils';
+import { softwareFuzzyQuery } from '~/lib/queries/software';
+import { sanityClient } from '~/lib/sanity/client';
 
 type Props = {
 	page: Page;
@@ -33,19 +35,20 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 	const getSoftware = React.useMemo(
 		() =>
 			debounce(
-				(
+				async (
 					request: { input: string },
 					callback: (results?: any) => void,
 				) => {
-					console.log(request, callback);
-					//(autocompleteService.current as any).getPlacePredictions(
-					//	request,
-					//	callback,
-					//);
+					const software = await sanityClient.fetch<Software>(softwareFuzzyQuery, {
+						name: request.input,
+						limit: 5,
+					});
+
+					callback(software);
 				},
 				400,
 			),
-		[],
+		[inputValue],
 	);
 
 	React.useEffect(() => {
@@ -55,15 +58,19 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 			return undefined;
 		}
 
-		getSoftware({ input: inputValue }, (results?: any) => {
+		// This is a debounced function to query for software by name
+		getSoftware({ input: inputValue }, (results?: Software[]) => {
+			console.log(results);
 			if (active) {
 				let newOptions = [];
 
 				if (value) {
+					console.log('VALUE IS TRUE, WHO KNEW!?');
 					newOptions = [value];
 				}
 
 				if (results) {
+					console.log('RESULTS!!!!');
 					newOptions = [...newOptions, ...results];
 				}
 
@@ -84,26 +91,29 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					disablePortal
 					id="combo-box-demo"
 					className="w-full"
-					getOptionLabel={(option) =>
-						typeof option === 'string' ? option : option.label
-					}
+					getOptionLabel={(option: any) => option === '' ? '' : option.softwareName}
 					noOptionsText="No software found"
 					options={options}
 					autoComplete
 					value={value}
 					sx={{ width: 300 }}
-					onChange={(event: any, newValue: string) => {
-						console.log(event);
+					onChange={(_event: any, newValue: string) => {
+						console.log('ONCHANGE');
 						setOptions(newValue ? [newValue, ...options] : options);
 						setValue(newValue);
 					}}
-					onInputChange={(event, newInputValue) => {
-						console.log(event);
+					onInputChange={(_event, newInputValue) => {
+						console.log('INPUT CHANGED');
 						setInputValue(newInputValue);
 					}}
 					renderInput={(params) => (
 						<TextField {...params} label="Search for software..." fullWidth />
 					)}
+					//renderOption={(props, option, { selected }) => (
+					//	<li>]
+					//		<div className={`p-4 font-bold cursor-pointer ${selected? 'bg-red-600' : 'bg-blue-600'}`}>{option.softwareName}</div>
+					//	</li>
+					//)}
 				/>
 			</div>
 			{page?.content?.map((section) => {

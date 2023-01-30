@@ -1,9 +1,13 @@
-import {groq} from 'next-sanity';
+import { groq } from 'next-sanity';
 
 export const softwareQuery = groq`
 	*[_type == 'software' && slug.current == $slug][0] {
 		...,
 	}
+`;
+
+export const softwareFuzzyQuery = groq`
+	*[_type == 'software' && defined(slug.current) && softwareName match "*"+$name+"*"] | order(softwareName desc)[0...$limit]
 `;
 
 export const softwareWithReviewsQuery = groq`
