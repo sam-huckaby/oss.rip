@@ -17,6 +17,9 @@
 	"author": "Sam Huckaby",
 	"license": "MIT",
 	"dependencies": {
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.10.5",
+		"@mui/material": "^5.11.6",
 		"@next/font": "^13.1.1",
 		"@portabletext/react": "^2.0.0",
 		"@sanity/asset-utils": "^1.3.0",
