@@ -5,7 +5,7 @@ import type {SiteSettings} from '~/models/site-settings';
 const Header = ({siteSettings}: {siteSettings: SiteSettings}) => {
 	return (
 		<header className='horizontal-wipeout
-			mx-auto max-w-5xl px-8 pt-8 flex flex-row items-start
+			mx-auto max-w-5xl pl-12 pr-8 pt-8 flex flex-row items-start
 			border-b border-b-slate-200'>
 			<Link href='/'>
 				<div className="

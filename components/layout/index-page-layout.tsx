@@ -10,6 +10,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { debounce } from '@mui/material/utils';
 import { softwareFuzzyQuery } from '~/lib/queries/software';
 import { sanityClient } from '~/lib/sanity/client';
+import Link from 'next/link';
 
 type Props = {
 	page: Page;
@@ -28,7 +29,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 		return <Heading level='h2'>Loading...</Heading>;
 	}
 
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState<Software | undefined>();
 	const [options, setOptions] = useState([]);
 	const [inputValue, setInputValue] = useState('');
 
@@ -39,12 +40,12 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					request: { input: string },
 					callback: (results?: any) => void,
 				) => {
-					const software = await sanityClient.fetch<Software>(softwareFuzzyQuery, {
+					const found = await sanityClient.fetch<Software>(softwareFuzzyQuery, {
 						name: request.input,
 						limit: 5,
 					});
 
-					callback(software);
+					callback(found);
 				},
 				400,
 			),
@@ -65,12 +66,10 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 				let newOptions = [];
 
 				if (value) {
-					console.log('VALUE IS TRUE, WHO KNEW!?');
 					newOptions = [value];
 				}
 
 				if (results) {
-					console.log('RESULTS!!!!');
 					newOptions = [...newOptions, ...results];
 				}
 
@@ -86,34 +85,39 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 	return (
 		<>
 			<div className="flex flex-row items-center justify-center pb-4 text-gray-400">Do not stare directly at the bugs</div>
-			<div className="flex flex-row items-center pb-4">
+			<div className="flex flex-row items-center justify-center pb-4">
 				<Autocomplete
-					disablePortal
-					id="combo-box-demo"
+					id="software-selector"
 					className="w-full"
 					getOptionLabel={(option: any) => option === '' ? '' : option.softwareName}
 					noOptionsText="No software found"
 					options={options}
 					autoComplete
+					disablePortal
+					handleHomeEndKeys
+					filterSelectedOptions
+					autoHighlight
 					value={value}
 					sx={{ width: 300 }}
-					onChange={(_event: any, newValue: string) => {
-						console.log('ONCHANGE');
+					onChange={(_event: any, newValue: Software) => {
 						setOptions(newValue ? [newValue, ...options] : options);
 						setValue(newValue);
 					}}
 					onInputChange={(_event, newInputValue) => {
-						console.log('INPUT CHANGED');
 						setInputValue(newInputValue);
 					}}
 					renderInput={(params) => (
-						<TextField {...params} label="Search for software..." fullWidth />
+						<TextField className="w-full" {...params} label="Search for software..." fullWidth />
 					)}
-					//renderOption={(props, option, { selected }) => (
-					//	<li>]
-					//		<div className={`p-4 font-bold cursor-pointer ${selected? 'bg-red-600' : 'bg-blue-600'}`}>{option.softwareName}</div>
-					//	</li>
-					//)}
+					renderOption={(props, option, { selected }) => (
+					// TODO: Figure out why arrowing down doesn't highlight options. Maybe I need to pass a prop?..
+						<li {...props} className={`p-4 hover:bg-gray-100 focus:bg-red-600`}>
+							<Link key={option._id} href={`/reviews/${option.slug.current}`}>
+								<div className={`text-xl font-bold cursor-pointer`}>{option.softwareName}</div>
+								<div className={`text-md italic cursor-pointer`}>{option.website}</div>
+							</Link>
+						</li>
+					)}
 				/>
 			</div>
 			{page?.content?.map((section) => {

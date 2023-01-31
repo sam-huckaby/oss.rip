@@ -4,7 +4,8 @@
 
 .horizontal-wipeout {
 	background-image:
-		linear-gradient(to right, #FFFFFF, #FFFFFF 10%, transparent, #FFFFFF 90%, #FFFFFF),
+		/*linear-gradient(to right, #FFFFFF, #FFFFFF 10%, transparent, #FFFFFF 90%, #FFFFFF),*/
+		linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 10%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%),
 		url('../public/confusing_banner.png');
 	background-position: 75px -100px;
 	height: 400px;

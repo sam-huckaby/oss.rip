@@ -10,7 +10,7 @@ type Props = {
 
 const SoftwareList = ({ software }: Props) => (
 	<div className='flex-col'>
-		<div className='grid gap-4 grid-cols-2 grid-rows-1'>
+		<div className='grid gap-4 grid-cols-1 md:grid-cols-2 grid-rows-1'>
 			{software.map((softwareX) => {
 				//if (!post.slug?.current) {
 				//	return null;
@@ -24,7 +24,7 @@ const SoftwareList = ({ software }: Props) => (
 							<div className='flex-col'>
 								{softwareX.featuredImage && <PostImage data={softwareX.featuredImage} width={600} height={450} />}
 								<Heading level='h2'>{softwareX.softwareName}</Heading>
-								<div className='flex flex-row items-center'>
+								<div className='flex flex-col md:flex-row items-center'>
 									{softwareX.publishedAt && <Date publishedAt={softwareX.publishedAt} />}
 									<div className='flex flex-row flex-wrap'>{keywords}</div>
 								</div>
