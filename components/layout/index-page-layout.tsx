@@ -11,6 +11,7 @@ import { debounce } from '@mui/material/utils';
 import { softwareFuzzyQuery } from '~/lib/queries/software';
 import { sanityClient } from '~/lib/sanity/client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type Props = {
 	page: Page;
@@ -28,6 +29,8 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 	if (preview && !page) {
 		return <Heading level='h2'>Loading...</Heading>;
 	}
+
+	const { push } = useRouter();
 
 	const [value, setValue] = useState<Software | undefined>();
 	const [options, setOptions] = useState([]);
@@ -100,8 +103,10 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					value={value}
 					sx={{ width: 300 }}
 					onChange={(_event: any, newValue: Software) => {
-						setOptions(newValue ? [newValue, ...options] : options);
-						setValue(newValue);
+						console.log('CHANGED');
+						push(`/reviews/${newValue.slug.current}`);
+						//setOptions(newValue ? [newValue, ...options] : options);
+						//setValue(newValue);
 					}}
 					onInputChange={(_event, newInputValue) => {
 						setInputValue(newInputValue);
@@ -109,15 +114,19 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					renderInput={(params) => (
 						<TextField className="w-full" {...params} label="Search for software..." fullWidth />
 					)}
-					renderOption={(props, option, { selected }) => (
-					// TODO: Figure out why arrowing down doesn't highlight options. Maybe I need to pass a prop?..
-						<li {...props} className={`p-4 hover:bg-gray-100 focus:bg-red-600`}>
-							<Link key={option._id} href={`/reviews/${option.slug.current}`}>
-								<div className={`text-xl font-bold cursor-pointer`}>{option.softwareName}</div>
-								<div className={`text-md italic cursor-pointer`}>{option.website}</div>
-							</Link>
-						</li>
-					)}
+					renderOption={
+						(props, option, { selected }) => {
+							return (
+								// TODO: Figure out why arrowing down doesn't highlight options. Maybe I need to pass a prop?..
+								<li {...props}>
+									<Link key={option._id} href={`/reviews/${option.slug.current}`}>
+										<div className={`text-xl font-bold cursor-pointer`}>{option.softwareName}</div>
+										<div className={`text-md italic cursor-pointer`}>{option.website}</div>
+									</Link>
+								</li>
+							)
+						}
+					}
 				/>
 			</div>
 			{page?.content?.map((section) => {
