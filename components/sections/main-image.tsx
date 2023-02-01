@@ -7,6 +7,6 @@ type Props = {
 	height?: number;
 };
 
-const MainImage = ({data, width = 1152, height = 740}: Props) => <Image data={data} width={width} height={height} />;
+const MainImage = ({data, width = 1152, height = 740}: Props) => <Image data={data} width={width} height={height} alt="" />;
 
 export default MainImage;

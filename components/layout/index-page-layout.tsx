@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 type Props = {
 	page: Page;
 	software: Software[];
-	//preview?: boolean;
+	preview?: boolean;
 }
 
 const IndexPage = ({ page, software/*, preview = false*/ }: Props) => {

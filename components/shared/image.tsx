@@ -7,6 +7,7 @@ interface ImageProps {
 	width?: number;
 	height?: number;
 	priority?: boolean;
+	alt?: string;
 }
 
 const ImageComponent = (props: ImageProps) => {
