@@ -10,7 +10,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { debounce } from '@mui/material/utils';
 import { softwareFuzzyQuery } from '~/lib/queries/software';
 import { sanityClient } from '~/lib/sanity/client';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -18,12 +17,6 @@ type Props = {
 	software: Software[];
 	preview?: boolean;
 }
-
-const top100Films = [
-	{ label: 'The Shawshank Redemption', year: 1994 },
-	{ label: 'The Godfather', year: 1972 },
-	{ label: 'The Godfather: Part II', year: 1974 },
-];
 
 const IndexPage = ({ page, software, preview = false }: Props) => {
 	if (preview && !page) {
@@ -104,6 +97,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					sx={{ width: 300 }}
 					onChange={(_event: any, newValue: Software) => {
 						push(`/reviews/${newValue.slug.current}`);
+						setValue(newValue);
 					}}
 					onInputChange={(_event, newInputValue) => {
 						setInputValue(newInputValue);
@@ -112,9 +106,8 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 						<TextField className="w-full" {...params} label="Search for software..." fullWidth />
 					)}
 					renderOption={
-						(props, option, { selected }) => {
+						(props, option) => {
 							return (
-								// TODO: Figure out why arrowing down doesn't highlight options. Maybe I need to pass a prop?..
 								<li {...props}>
 									{/*<Link key={option._id} href={`/reviews/${option.slug.current}`}>*/}
 										<div className={`text-xl font-bold cursor-pointer`}>{option.softwareName}</div>
