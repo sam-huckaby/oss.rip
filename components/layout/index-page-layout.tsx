@@ -15,10 +15,10 @@ import { useRouter } from 'next/navigation';
 type Props = {
 	page: Page;
 	software: Software[];
-	preview?: boolean;
+	//preview?: boolean;
 }
 
-const IndexPage = ({ page, software, preview = false }: Props) => {
+const IndexPage = ({ page, software/*, preview = false*/ }: Props) => {
 	/* TODO: This should be replaced with a suspense loader in a loading.ts or something
 	if (preview && !page) {
 		return <Heading level='h2'>Loading...</Heading>;
@@ -47,7 +47,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 				},
 				400,
 			),
-		[inputValue],
+		[],
 	);
 
 	React.useEffect(() => {
@@ -70,7 +70,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 
 				setOptions(newOptions);
 		});
-	}, [value, inputValue]);
+	}, [value, inputValue, getSoftware]);
 
 	return (
 		<>
@@ -79,7 +79,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 				<Autocomplete
 					id="software-selector"
 					className="w-full"
-					getOptionLabel={(option: any) => option === '' ? '' : option.softwareName}
+					getOptionLabel={(option: Software) => option.softwareName}
 					noOptionsText="No software found"
 					options={options}
 					autoComplete
@@ -89,7 +89,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					autoHighlight
 					value={value}
 					sx={{ width: 300 }}
-					onChange={(_event: any, newValue: Software) => {
+					onChange={(_event, newValue: Software) => {
 						router?.push?.(`/reviews/${newValue.slug.current}`);
 						setValue(newValue);
 					}}
