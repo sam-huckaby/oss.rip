@@ -29,7 +29,7 @@ const ReviewRoute = async ({params}: {params: {slug: string}}) => {
 		);
 	}
 
-	return <ReviewPageLayout software={software} />;
+	return <ReviewPageLayout preview={!software} software={software} />;
 };
 
 export default ReviewRoute;

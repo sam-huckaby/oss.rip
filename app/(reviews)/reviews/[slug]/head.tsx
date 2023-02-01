@@ -12,7 +12,7 @@ const Head = async ({params}: {params: {slug: string}}) => {
 		})
 	]);
 
-	const title = `${software.softwareName} | ${siteSettings?.title}`;
+	const title = `${software?.softwareName} | ${siteSettings?.title}`;
 	const description = software?.meta?.metaDescription || siteSettings?.description;
 	const ogTitle = software?.meta?.openGraphTitle ?? title;
 	const ogDescription = software?.meta?.openGraphDescription;

@@ -5,12 +5,11 @@ import { Review } from '~/models/review';
 import Link from 'next/link';
 
 const ReviewPage = ({ software, preview = false }: { software: Software; preview?: boolean }) => {
-	const keywords = software.keywords?.map((tag) => <Tag className="mb-2" key={tag}>{tag}</Tag>);
-
 	if (preview && !software) {
 		return <Heading level='h2'>Loading…</Heading>;
 	}
 
+	const keywords = software.keywords?.map((tag) => <Tag className="mb-2" key={tag}>{tag}</Tag>);
 	const editorials = [];
 	const nonEditorials = [];
 

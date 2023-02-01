@@ -18,7 +18,7 @@ const SlugRoute = async ({params}: {params: {slug: string}}) => {
 		);
 	}
 
-	return <PageLayout page={page} />;
+	return <PageLayout preview={!page} page={page} />;
 };
 
 export default SlugRoute;
