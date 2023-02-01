@@ -19,11 +19,13 @@ type Props = {
 }
 
 const IndexPage = ({ page, software, preview = false }: Props) => {
+	/* TODO: This should be replaced with a suspense loader in a loading.ts or something
 	if (preview && !page) {
 		return <Heading level='h2'>Loading...</Heading>;
 	}
+	*/
 
-	const { push } = useRouter();
+	const router = useRouter();
 
 	const [value, setValue] = useState<Software | undefined>();
 	const [options, setOptions] = useState([]);
@@ -49,7 +51,6 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 	);
 
 	React.useEffect(() => {
-		let active = true;
 		if (inputValue === '') {
 			setOptions(value ? [value] : []);
 			return undefined;
@@ -57,8 +58,6 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 
 		// This is a debounced function to query for software by name
 		getSoftware({ input: inputValue }, (results?: Software[]) => {
-			console.log(results);
-			if (active) {
 				let newOptions = [];
 
 				if (value) {
@@ -70,13 +69,8 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 				}
 
 				setOptions(newOptions);
-			}
 		});
-
-		return () => {
-			active = false;
-		};
-	}, [value, inputValue, fetch]);
+	}, [value, inputValue]);
 
 	return (
 		<>
@@ -96,7 +90,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					value={value}
 					sx={{ width: 300 }}
 					onChange={(_event: any, newValue: Software) => {
-						push?.(`/reviews/${newValue.slug.current}`);
+						router?.push?.(`/reviews/${newValue.slug.current}`);
 						setValue(newValue);
 					}}
 					onInputChange={(_event, newInputValue) => {
@@ -108,11 +102,9 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					renderOption={
 						(props, option) => {
 							return (
-								<li {...props}>
-									{/*<Link key={option._id} href={`/reviews/${option.slug.current}`}>*/}
-										<div className={`text-xl font-bold cursor-pointer`}>{option.softwareName}</div>
-										<div className={`text-md italic cursor-pointer`}>{option.website}</div>
-									{/*</Link>*/}
+								<li key={option.softwareName} {...props}>
+									<div className={`text-xl font-bold cursor-pointer`}>{option.softwareName}</div>
+									<div className={`text-md italic cursor-pointer`}>{option.website}</div>
 								</li>
 							);
 						}
