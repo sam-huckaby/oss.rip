@@ -3,12 +3,12 @@
 import {usePreview as _usePreview} from '~/lib/sanity/preview';
 import {IndexPageLayout} from '~/components/layout';
 import type {Page} from '~/models/page';
-import type {Post} from '~/models/post';
 import type {UsePreview} from 'next-sanity/preview';
+import { Software } from '~/models/software';
 
-type PageWithPosts = {
+type PageWithSoftware = {
 	page: Page;
-	posts: Post[];
+	software: Software[];
 };
 
 type Props = {
@@ -16,12 +16,12 @@ type Props = {
 	variables: Record<string, string | number>;
 };
 
-const usePreview: UsePreview<PageWithPosts> = _usePreview;
+const usePreview: UsePreview<PageWithSoftware> = _usePreview;
 
 const Preview = ({query, variables}: Props) => {
 	const data = usePreview(null, query, variables);
 
-	return <IndexPageLayout preview page={data.page} posts={data.posts} />;
+	return <IndexPageLayout preview page={data.page} software={data.software} />;
 };
 
 export default Preview;

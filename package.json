@@ -86,7 +86,6 @@
 		],
 		"rules": {
 			"semi": "error",
-			"comma-dangle": "on",
 			"no-multiple-empty-lines": "error",
 			"no-multi-spaces": "error",
 			"@typescript-eslint/no-unused-vars": [
