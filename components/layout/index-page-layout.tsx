@@ -34,9 +34,9 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 			debounce(
 				async (
 					request: { input: string },
-					callback: (results?: any) => void,
+					callback: (results?: Software[]) => void,
 				) => {
-					const found = await sanityClient.fetch<Software>(softwareFuzzyQuery, {
+					const found = await sanityClient.fetch<Software[]>(softwareFuzzyQuery, {
 						name: request.input,
 						limit: 5,
 					});
@@ -96,7 +96,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 					value={value}
 					sx={{ width: 300 }}
 					onChange={(_event: any, newValue: Software) => {
-						push(`/reviews/${newValue.slug.current}`);
+						push?.(`/reviews/${newValue.slug.current}`);
 						setValue(newValue);
 					}}
 					onInputChange={(_event, newInputValue) => {
@@ -114,7 +114,7 @@ const IndexPage = ({ page, software, preview = false }: Props) => {
 										<div className={`text-md italic cursor-pointer`}>{option.website}</div>
 									{/*</Link>*/}
 								</li>
-							)
+							);
 						}
 					}
 				/>
