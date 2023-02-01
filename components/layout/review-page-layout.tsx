@@ -22,7 +22,7 @@ const ReviewPage = ({ software, preview = false }: { software: Software; preview
 		}
 	}
 
-	const ReviewBox = (review: Review, editorial  = false) => {
+	const ReviewBox = (review: Review, editorial = false) => {
 		return <div className={`p-4  ${!editorial ? "bg-gray-100" : ""}`}>
 			<Heading level='h3' className="border-b">{review.title}</Heading>
 			{
