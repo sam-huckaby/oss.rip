@@ -5,7 +5,7 @@ import { Review } from '~/models/review';
 import Link from 'next/link';
 
 const ReviewPage = ({ software, preview = false }: { software: Software; preview?: boolean }) => {
-	const keywords = software.keywords?.map((tag) => <Tag key={tag}>{tag}</Tag>);
+	const keywords = software.keywords?.map((tag) => <Tag className="mb-2" key={tag}>{tag}</Tag>);
 
 	if (preview && !software) {
 		return <Heading level='h2'>Loading…</Heading>;
@@ -42,16 +42,16 @@ const ReviewPage = ({ software, preview = false }: { software: Software; preview
 	return (
 		<article>
 			<div className='pb-2 mb-2 border-b'>
-				<Heading level='h1'>{software.softwareName}</Heading>
+				<Heading className="mb-2" level='h1'>{software.softwareName}</Heading>
 				<div className="text-sm">
 					<Link className="underline text-purple-600 hover:no-underline" href={software.website} target="_blank">{software.website}</Link>
 				</div>
-				<div className='flex flex-row items-center'>
-					{software.publishedAt && <><span className="text-sm font-bold">Published:</span>&nbsp;<Date publishedAt={software.publishedAt} /></>}
-					<div className='flex flex-row'>{keywords}</div>
+				<div className='flex flex-col md:flex-row items-start md:items-center'>
+					{software.publishedAt && <div className="flex flex-row my-2"><span className="text-sm font-bold">Published:</span>&nbsp;<Date publishedAt={software.publishedAt} /></div>}
+					<div className='flex flex-row flex-wrap'>{keywords}</div>
 				</div>
 			</div>
-			<div className="flex flex-row">
+			<div className="flex flex-col md:flex-row">
 				<div className="flex flex-col basis-1/2">
 					<Heading level='h2'>Editors Take</Heading>
 					{editorials.map((review: Review) => ReviewBox(review, true))}
