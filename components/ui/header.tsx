@@ -4,10 +4,12 @@ import type {SiteSettings} from '~/models/site-settings';
 
 const Header = ({siteSettings}: {siteSettings: SiteSettings}) => {
 	return (
-		<header className='horizontal-wipeout
-			mx-auto max-w-5xl pl-12 pr-8 pt-8 flex flex-row items-start
-			border-b border-b-slate-200'>
-			<Link href='/'>
+		<header className="horizontal-wipeout
+			mx-auto max-w-5xl
+			pl-12 pr-8 pt-8
+			flex flex-row items-start
+			border-b border-b-slate-200">
+			<Link href='/' className="-ml-12 pl-12">
 				<div className="
 					flex flex-row items-center
 					border-4 border-black rounded-t-full

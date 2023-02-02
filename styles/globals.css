@@ -2,11 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.horizontal-wipeout {
-	background-image:
 		/*linear-gradient(to right, #FFFFFF, #FFFFFF 10%, transparent, #FFFFFF 90%, #FFFFFF),*/
+	/*background-image:
 		linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 10%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%),
+		url('../public/confusing_banner.png');*/
+	/*background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%);*/
+.horizontal-wipeout {
+	/*background: radial-gradient(circle at 100%, #FFFFFF, #FFFFFF 50%, rgba(255,255,255,0) 75%, #FFFFFF 75%);*/
+	background-image:
+		radial-gradient(circle at 100%, rgba(255,255,255,0) 0%, 50%, #FFFFFF 75%),
+		linear-gradient(to right, transparent, 80%, #FFFFFF),
 		url('../public/confusing_banner.png');
-	background-position: 75px -100px;
 	height: 400px;
+	background-position: 0 -100px;
 }

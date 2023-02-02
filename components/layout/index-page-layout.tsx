@@ -88,7 +88,6 @@ const IndexPage = ({ page, software/*, preview = false*/ }: Props) => {
 					filterSelectedOptions
 					autoHighlight
 					value={value}
-					sx={{ width: 300 }}
 					onChange={(_event, newValue: Software) => {
 						router?.push?.(`/reviews/${newValue.slug.current}`);
 						setValue(newValue);
