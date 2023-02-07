@@ -56,7 +56,7 @@ const IndexPage = ({ page, software/*, preview = false*/ }: Props) => {
 			return undefined;
 		}
 
-		// This is a debounced function to query for software by name
+		// This is a debounced function to query for software by name. is it necessary?
 		getSoftware({ input: inputValue }, (results?: Software[]) => {
 				let newOptions = [];
 
