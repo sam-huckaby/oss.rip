@@ -87,7 +87,6 @@ const IndexPage = ({ page, software/*, preview = false*/ }: Props) => {
 					handleHomeEndKeys
 					filterSelectedOptions
 					autoHighlight
-					value={value}
 					onChange={(_event, newValue: Software) => {
 						router?.push?.(`/reviews/${newValue.slug.current}`);
 						setValue(newValue);
@@ -99,11 +98,12 @@ const IndexPage = ({ page, software/*, preview = false*/ }: Props) => {
 						<TextField className="w-full" {...params} label="Search for software..." fullWidth />
 					)}
 					renderOption={
-						(props, option) => {
+						(props: React.HTMLAttributes<HTMLLIElement> & { key: string }, option) => {
+              const { key, className, ...rest } = props;
 							return (
-								<li key={option.softwareName} {...props}>
-									<div className={`text-xl font-bold cursor-pointer`}>{option.softwareName}</div>
-									<div className={`text-md italic cursor-pointer`}>{option.website}</div>
+								<li key={key} {...rest} className={`${className} flex flex-col`}>
+									<div className={`text-xl font-bold cursor-pointer self-start justify-self-start`}>{option.softwareName}</div>
+									<div className={`text-md italic cursor-pointer self-start justify-self-start`}>{option.website}</div>
 								</li>
 							);
 						}
